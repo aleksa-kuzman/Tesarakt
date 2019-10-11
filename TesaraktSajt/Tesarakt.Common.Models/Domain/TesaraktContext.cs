@@ -19,11 +19,12 @@ namespace Tesarakt.Common.Models.Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<GrupaProizvoda>(entity =>
+            modelBuilder.Entity((Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<GrupaProizvoda> entity) =>
             {
-                entity.HasKey(e => e.GrupaId);
+                entity.HasKey(e => e.Id);
+                
 
-                entity.Property(e => e.GrupaId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever().HasColumnName("GrupaId");
 
                 entity.Property(e => e.NazivGrupe).HasMaxLength(50);
             });

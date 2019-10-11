@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tesarakt.Common.Contracts\Tesarakt.Common.Contracts.csproj" />
     <ProjectReference Include="..\Tesarakt.Common.Models\Tesarakt.Common.Models.csproj" />
     <ProjectReference Include="..\Tesarakt.DAL.Common\Tesarakt.DAL.Common.csproj" />
   </ItemGroup>

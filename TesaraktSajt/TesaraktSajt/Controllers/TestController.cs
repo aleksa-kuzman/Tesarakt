@@ -6,6 +6,7 @@ using Common.Models.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Tesarakt.Common.Contracts;
 using Tesarakt.Common.Models.Domain;
 using Tesarakt.DAL.Common.Repository;
 using Tesarakt.DAL.Common.UoW;
@@ -35,6 +36,16 @@ namespace TesaraktSajt.Controllers
                 return new OkObjectResult(res);
 
             else return NotFound();
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var res = _grupaProizvodaService.GetGrupa(id);
+            if (res != null)
+                return new OkObjectResult(res);
+            else return NotFound();
+
         }
 
 

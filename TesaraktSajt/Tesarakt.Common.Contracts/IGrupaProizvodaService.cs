@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Tesarakt.Common.Models.Domain;
 
-namespace Common.Models.Services
+namespace Tesarakt.Common.Contracts
 {
     public interface IGrupaProizvodaService
     {
         IEnumerable<GrupaProizvoda> GetAllGrupaProizvoda();
+        GrupaProizvoda GetGrupa(int id);
+
     }
 }

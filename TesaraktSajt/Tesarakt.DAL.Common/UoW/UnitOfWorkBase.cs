@@ -34,7 +34,7 @@ namespace Tesarakt.DAL.Common.UoW
 
                 return repository;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

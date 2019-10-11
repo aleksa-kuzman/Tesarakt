@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Tesarakt.Common.Contracts;
 using Tesarakt.Common.Models.Domain;
 using Tesarakt.DAL.Common.UoW;
 
@@ -27,9 +29,10 @@ namespace Common.Models.Services
       
         public IEnumerable<GrupaProizvoda> GetAllGrupaProizvoda()
         {
+            
             try
             {
-                var a = _uow.GetRepository<GrupaProizvoda, int>().GetAll();
+                var a = _uow.GetRepository<GrupaProizvoda, int>().GetAll(null,m=>m.Where( f=>f.Id == 100 ));
                 return a;
             }
             catch (Exception)
@@ -38,5 +41,20 @@ namespace Common.Models.Services
                 throw;
             }
         }
+
+        public GrupaProizvoda GetGrupa (int id)
+        {
+            try
+            {
+                return _uow.GetRepository<GrupaProizvoda, int>().GetAll(null, m => m.Where(f => f.Id == 100) ).SingleOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        
     }
 }

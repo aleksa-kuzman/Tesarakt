@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Tesarakt.Common.Contracts;
 using Tesarakt.Common.Models.Domain;
 using Tesarakt.DAL.Common.Repository;
 using Tesarakt.DAL.Common.UoW;
