@@ -46,7 +46,7 @@ namespace Common.Models.Services
         {
             try
             {
-                return _uow.GetRepository<GrupaProizvoda, int>().GetAll(null, m => m.Where(f => f.Id == 100) ).SingleOrDefault();
+                return _uow.GetRepository<GrupaProizvoda, int>().Get(id);
             }
             catch (Exception)
             {

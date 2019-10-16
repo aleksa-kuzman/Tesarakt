@@ -59,5 +59,13 @@ namespace Tesarakt.DAL.Common.Repository
             }
             return entities;
         }
+
+        public void Add(TEntity entity)
+        {
+            if (entity == null) throw new InvalidOperationException("Unable to add null entity to repository");
+
+            Context.Set<TEntity>().Add(entity);
+
+        }
     }
 }

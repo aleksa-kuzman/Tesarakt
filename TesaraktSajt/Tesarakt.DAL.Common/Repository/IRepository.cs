@@ -10,7 +10,8 @@ namespace Tesarakt.DAL.Common.Repository
     {
         IEnumerable<TEntity> GetAll(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null);
         IEnumerable<TEntity> Query(Expression<Func<TEntity, bool>> filter, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null);
-     /*   TEntity Get(TId id, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null);*/
+        TEntity Get(TId id, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null);
+        void Add(TEntity entity);
 
 
     }

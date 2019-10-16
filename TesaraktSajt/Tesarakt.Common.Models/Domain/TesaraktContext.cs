@@ -13,7 +13,7 @@ namespace Tesarakt.Common.Models.Domain
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=DESKTOP-TQ3HLQF;Database=Tesarakt;Trusted_Connection=true;");
+                optionsBuilder.UseMySql(@"server=localhost;Database=tesarakt;user=root;password='' ");
             }
         }
 
@@ -24,15 +24,17 @@ namespace Tesarakt.Common.Models.Domain
                 entity.HasKey(e => e.Id);
                 
 
-                entity.Property(e => e.Id).ValueGeneratedNever().HasColumnName("GrupaId");
+                entity.Property(e => e.Id).ValueGeneratedOnAdd().HasColumnName("GrupaId");
 
                 entity.Property(e => e.NazivGrupe).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Proizvod>(entity =>
             {
-                entity.Property(e => e.ProizvodId).ValueGeneratedNever();
 
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd().HasColumnName("ProizvodId");
+               
                 entity.Property(e => e.NazivProizvoda).HasMaxLength(50);
             });
         }

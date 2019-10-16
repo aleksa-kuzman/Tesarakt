@@ -7,5 +7,8 @@ namespace Tesarakt.Common.Models.Domain
     {
         public int Id { get; set; }
         public string NazivGrupe { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public int ModifiedByUserId { get; set; }
+        public bool Active { get; set; }
     }
 }
