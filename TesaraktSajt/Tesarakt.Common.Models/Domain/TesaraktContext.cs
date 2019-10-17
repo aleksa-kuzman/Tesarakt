@@ -9,13 +9,18 @@ namespace Tesarakt.Common.Models.Domain
         public virtual DbSet<GrupaProizvoda> GrupaProizvoda { get; set; }
         public virtual DbSet<Proizvod> Proizvod { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        public TesaraktContext(DbContextOptions<TesaraktContext> options) :base (options)
+        {
+
+        }
+       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseMySql(@"server=localhost;Database=tesarakt;user=root;password='' ");
             }
-        }
+        }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

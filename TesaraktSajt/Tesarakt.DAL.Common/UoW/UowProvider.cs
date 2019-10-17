@@ -17,6 +17,7 @@ namespace Tesarakt.DAL.Common.UoW
         }
         public IUnitOfWork CreateUnitOfWork<TEntityContext>() where TEntityContext : class
         {
+         //   var con = _serviceProvider.GetService(typeof(TEntityContext));
             var _context = (DbContext)_serviceProvider.GetService(typeof(TEntityContext));
 
             var uow = new UnitOfWork(_context, _serviceProvider);

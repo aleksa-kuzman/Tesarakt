@@ -9,6 +9,7 @@ using Tesarakt.DAL.Common.UoW;
 
 namespace Common.Models.Services
 {
+
    public class GrupaProizvodaService : IGrupaProizvodaService
     {
         IUowProvider _uowProvider;
@@ -25,8 +26,47 @@ namespace Common.Models.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public bool AddGrupa(GrupaProizvoda grupaProizvoda)
+        {
+            try
+            {
+                _uow.GetRepository<GrupaProizvoda, int>().Add(grupaProizvoda);
+                _uow.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                 return false;
+            }
+        }
+
+        public bool DeactivateGrupa(int id)
+        {
+
+            try
+            {
+                var grupa = _uow.GetRepository<GrupaProizvoda, int>().Get(id);
+                if (grupa == null)
+                    return false;
+
+                grupa.Active = false;
+                if (_uow.GetRepository<GrupaProizvoda, int>().Update(grupa) == null)
+                    return false;
+
+                _uow.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+           
+
+            
+        }
+
         
-      
         public IEnumerable<GrupaProizvoda> GetAllGrupaProizvoda()
         {
             
@@ -55,6 +95,20 @@ namespace Common.Models.Services
             }
         }
 
-        
+        public bool RemoveGrupa(int id)
+        {
+            try
+            {
+                _uow.GetRepository<GrupaProizvoda, int>().Remove(id);
+                _uow.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+           
+        }
     }
 }

@@ -9,6 +9,9 @@ namespace Tesarakt.Common.Contracts
     {
         IEnumerable<GrupaProizvoda> GetAllGrupaProizvoda();
         GrupaProizvoda GetGrupa(int id);
+        bool RemoveGrupa(int id);
+        bool AddGrupa(GrupaProizvoda grupaProizvoda);
+        bool DeactivateGrupa(int id);
 
     }
 }

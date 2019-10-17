@@ -31,11 +31,13 @@ namespace TesaraktSajt
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DbContext, TesaraktContext>();
+            services.TryAddTransient(typeof(IRepository<,>), typeof(GenericEntityRepository<,>));
             services.TryAddScoped<IUowProvider, UowProvider>();
+            services.AddDbContext<TesaraktContext>(options => options.UseMySql(@"server=localhost;Database=tesarakt;user=root;password='' "));
+            services.AddScoped<DbContext, TesaraktContext>();
             services.AddTransient<IGrupaProizvodaService, GrupaProizvodaService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.TryAddTransient(typeof(IRepository<,>), typeof(GenericEntityRepository<,>));
+          //  services.AddDbContext<DbContext, TesaraktContext>(options=>options.UseMySql(@"server=localhost;Database=tesarakt;user=root;password='' "));
             services.AddMvc();
         }
 

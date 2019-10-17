@@ -8,12 +8,11 @@ using Tesarakt.Common.Models;
 
 namespace Tesarakt.DAL.Common.Repository
 {
-   public class EntityRepositoryBase<TContext, TEntity, TId> : IRepository<TEntity, TId> where TContext : DbContext where TEntity : class, IEntityRequiredProperties<TId>, new () where TId : IComparable
+   public class EntityRepositoryBase<TContext, TEntity, TId> : RepositoryBase<TContext>, IRepository<TEntity, TId> where TContext : DbContext where TEntity : class, IEntityRequiredProperties<TId>, new () where TId : IComparable
     {
-        protected TContext Context { get; private set; }
-        public EntityRepositoryBase(TContext context)
+        public EntityRepositoryBase(TContext context):base (context)
         {
-            this.Context = context;
+         
         }
         public IEnumerable<TEntity> GetAll(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null)
         {
@@ -66,6 +65,32 @@ namespace Tesarakt.DAL.Common.Repository
 
             Context.Set<TEntity>().Add(entity);
 
+        }
+
+        public TEntity Update(TEntity entity)
+        {
+            return Context.Set<TEntity>().Update(entity).Entity;
+        }
+
+        public void Remove(TEntity entity)
+        {
+            Context.Set<TEntity>().Attach(entity);
+            Context.Entry(entity).State = EntityState.Deleted;
+            Context.Set<TEntity>().Remove(entity);
+        }
+
+        public void Remove(TId id)
+        {
+            var entity = new TEntity { Id = id };
+            this.Remove(entity);
+           
+            
+        }
+
+        public void Remove(ICollection<TEntity> entities)
+        {
+            Context.Set<TEntity>().AttachRange(entities);
+            Context.Set<TEntity>().RemoveRange(entities);
         }
     }
 }

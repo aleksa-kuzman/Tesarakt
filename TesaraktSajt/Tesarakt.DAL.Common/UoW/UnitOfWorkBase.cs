@@ -7,15 +7,15 @@ using Tesarakt.DAL.Common.Repository;
 
 namespace Tesarakt.DAL.Common.UoW
 {
-    public class UnitOfWorkBase<TContext> : IUnitOfWorkBase where TContext : DbContext
+    public abstract class UnitOfWorkBase<TContext> : IUnitOfWorkBase where TContext : DbContext
     {
         protected TContext _context;
         protected IServiceProvider _serviceProvider;
 
         public  UnitOfWorkBase( TContext context, IServiceProvider serviceProvider)
         {
-            _serviceProvider = serviceProvider;
             _context = context;
+            _serviceProvider = serviceProvider;
         }
         public void Dispose()
         {
@@ -31,7 +31,7 @@ namespace Tesarakt.DAL.Common.UoW
                 var repository = (IRepository<TEntity, TId>)_serviceProvider.GetService(repoType);
 
 
-
+                ((IRepositoryInjection<TContext>)repository).SetContext(_context);
                 return repository;
             }
             catch (Exception ex)

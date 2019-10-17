@@ -18,18 +18,18 @@ namespace TesaraktSajt.Controllers
     public class TestController : Controller
     {
         IGrupaProizvodaService _grupaProizvodaService;
-    
+
 
         public TestController(IGrupaProizvodaService grupaProizvodaService)
         {
             _grupaProizvodaService = grupaProizvodaService;
-           
+
 
         }
 
         [HttpGet]
         public IActionResult Get()
-          {
+        {
 
             var res = _grupaProizvodaService.GetAllGrupaProizvoda();
             if (res != null)
@@ -46,6 +46,27 @@ namespace TesaraktSajt.Controllers
                 return new OkObjectResult(res);
             else return NotFound();
 
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            if (_grupaProizvodaService.RemoveGrupa(id))
+                return Ok();
+            else
+                return NotFound();
+        }
+
+
+        [HttpDelete("deactivate/{id}")]
+      //  [Route("{deactivate}")]
+        public IActionResult Deactivate ( int id)
+        {
+            if (_grupaProizvodaService.DeactivateGrupa(id))
+                return Ok();
+            else
+                return NotFound();
         }
 
 
